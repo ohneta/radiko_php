@@ -31,33 +31,32 @@ radiko.phpで利用することを前提とした必要最低限の機能しか�
 ## コマンドラインでの使い方
 
 ### 放送局一覧を表示
-パラメタなしで当方で受信を確認した放送局の一覧を表示します。（東京都内よりアクセス）
+パラメタなしで受信可能な放送局の一覧を表示します。
 
 (radikoは、ご利用のネット環境のIPアドレスから受信可能地域を算出しているようです)
 
 ```bash
 % php radiko.php
+受信可能放送局ID 
+TBS : TBSラジオ
+QRR : 文化放送
+LFR : ニッポン放送
+RN1 : ラジオNIKKEI第1
+RN2 : ラジオNIKKEI第2
+INT : InterFM897
+FMT : TOKYO FM
+FMJ : J-WAVE
+JORF : ラジオ日本
+BAYFM78 : bayfm78
+NACK5 : NACK5
+YFM : ＦＭヨコハマ
+IBS : LuckyFM 茨城放送
+HOUSOU-DAIGAKU : 放送大学
+JOAK : NHKラジオ第1（東京）
+JOAK-FM : NHK-FM（東京）
 ```
 
-受信可能放送局ID
-|ID| 放送局名|
-|---|---|
-|TBS|TBSラジオ|
-|QRR|文化放送|
-|LFR|ニッポン放送|
-|RN1|ラジオNIKKEI第1|
-|RN2|ラジオNIKKEI第2|
-|INT|InterFM897|
-|FMT|TOKYO FM|
-|FMJ|J-WAVE|
-|JORF|ラジオ日本|
-|BAYFM78|bayfm78|
-|NACK5|NACK5|
-|YFM|ＦＭヨコハマ|
-|HOUSOU-DAIGAKU|放送大学|
-|JOAK|NHKラジオ第1（東京）|
-|JOAK-FM|NHK-FM（東京）|
-
+上記は当方(東京都内で実行)の環境で確認した放送局の一覧です。
 
 ## 視聴する
 
