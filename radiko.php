@@ -5,8 +5,10 @@
 include_once ('./httpAccess.php');
 
   $gHttpAccess = new httpAccess();
-  $calledStation = strtoupper($argv[1]);
-  //print("station: $calledStation" . PHP_EOL);
+  $calledStation = '';
+  if ($argc > 1) {
+    $calledStation = strtoupper($argv[1]);
+  }
 
   //--------------------------------------------------------------------------------
   function getHttp($url, $headers = [])
@@ -71,12 +73,13 @@ include_once ('./httpAccess.php');
       exit("status error: $status\n");
     }
 
-    $authToken = $headers['X-Radiko-AuthToken'];
-    if ($authToken == '') {
-      $authToken = $headers['X-RADIKO-AUTHTOKEN'];
+    $upperCaseHeaders = [];
+    foreach ($headers as $key => $val) {
+      $upperCaseHeaders[strtoupper($key)] = $val;
     }
-    $keyOffset = $headers['X-Radiko-KeyOffset'];
-    $keyLength = $headers['X-Radiko-KeyLength'];
+    $authToken = $upperCaseHeaders['X-RADIKO-AUTHTOKEN'];
+    $keyOffset = $upperCaseHeaders['X-RADIKO-KEYOFFSET'];
+    $keyLength = $upperCaseHeaders['X-RADIKO-KEYLENGTH'];
 
     return array($authToken, $keyOffset, $keyLength);
  }
@@ -110,6 +113,8 @@ include_once ('./httpAccess.php');
   //--------------------------------------------------------------------------------
   function getUrlFromPlaylist($xml)
   {
+    global $calledStation;
+
     $xmlDomDoc = new DOMDocument();
     $ret = $xmlDomDoc->loadXML($xml);
     $urlNodeList = $xmlDomDoc->getElementsByTagName('url');
@@ -313,9 +318,9 @@ print("infDuration = $infDuration ". PHP_EOL);
       system($cmd);
 
 /*
-$cmd = "wget $chunklistUrl";
-print($cmd . PHP_EOL);
-system($cmd);
+  $cmd = "wget $chunklistUrl";
+  print($cmd . PHP_EOL);
+  system($cmd);
 */
     }
   }
